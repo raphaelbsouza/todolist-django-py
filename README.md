@@ -64,13 +64,11 @@ View = Camada do que a aplicação irá realizar.
 
 python .\manage.py migrate
 
-==========
 Criando Segurança no Projeto.
+
 Biblioteca Python decouple
-=
 
 pip install python-decouple 
-
 
 =======
 Biblioteca dj-database-url
