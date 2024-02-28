@@ -1,15 +1,16 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Tarefas -=- {% block page_title %}{% endblock page_title %}</title>
+    <title>List To Do - {% block page_title %}{% endblock page_title %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
 <body>
     <nav class="navbar bg-dark mb-4" data-base-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">List To do</a>
+            <a class="navbar-brand" href="{% url 'todo_list' %}">List To do</a>
         </div>
     </nav>
         <main class="container">

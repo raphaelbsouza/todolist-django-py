@@ -1,59 +1,53 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To do List -=-</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
+{% extends 'base.html' %}
 
-<body>
-    <nav class="navbar bg-dark mb-4" data-base-theme="dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">List To do</a>
-        </div>
-    </nav>
-        <main class="container">
-            <div class="alert alert-dark" role="alert">
-                <h3>Lista de Tarefas</h3>
-            </div>
-            {% if todo_list %}
-                <table class="table table-dark">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">ID</th>
-                        <th scope="col">Criado <em></em></th>
-                        <th scope="col">Data de Entrega</th>
-                        <th scope="col">Finalizado em</th>
-                        <th scope="col">Ações</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% for todo in todo_list %}
-                    <tr>
-                        <th scope="row">{{ todo.pk }}</th>
-                        <td>{{ todo.title }}</td>
-                        <td>{{ todo.created_at }}</td>
-                        <td>{{ todo.deadline }}</td>
-                        <td>{{ todo.finish_at|default:"----" }}</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-sm">Cocnluir</a>
-                            <a href="#" class="btn btn-danger btn-sm">Excluir</a>
-                        </td>
-                    </tr>
-                        {% endfor %}    
-                    </tbody>
-                </table>
+{% block page_title %}
+    Lista de Tarefas
+{% endblock page_title %}
 
-            {% else %}
-            </br>
-                <p>Não Há Tarefas Cadastradas...</p>
-            {% endif %}
-            <a href="{% url 'todo_create' %}" class="btn btn-primary">Nova Tarefa</a>
-        </main>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</body>
-</html>
+{% block content %} 
+    <div class="alert alert-dark" role="alert">
+        <h3>Lista de Tarefas</h3>
+        <span class="badge badge-primary">Primary</span>
+        <span class="badge badge-secondary">Secondary</span>
+        <span class="badge badge-success">Success</span>
+        <span class="badge badge-danger">Danger</span>
+        <span class="badge badge-warning">Warning</span>
+        <span class="badge badge-info">Info</span>
+        <span class="badge badge-light">Light</span>
+        <span class="badge badge-dark">Dark</span>
+    </div>
+    {% if todo_list %}
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Criado <em></em></th>
+                <th scope="col">Data de Entrega</th>
+                <th scope="col">Finalizado em</th>
+                <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for todo in todo_list %}
+            <tr>
+                <th scope="row">{{ todo.pk }}</th>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.created_at }}</td>
+                <td>{{ todo.deadline }}</td>
+                <td>{{ todo.finish_at|default:"----" }}</td>
+                <td>
+                    <a href="{% url 'todo_complete' pk=todo.pk %}" class="btn btn-primary btn-sm {% if todo.finish_at %}disabled{% endif %}">Cocnluir</a>
+                    <a href="{% url 'todo_update' pk=todo.pk %}" class="btn btn-secondary btn-sm {% if todo.finish_at %}disabled{% endif %}">Editar</a>
+                    <a href="{% url 'todo_delete' pk=todo.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+                {% endfor %}    
+            </tbody>
+        </table>
+    {% else %}
+    </br>
+        <p>Não Há Tarefas Cadastradas...</p>
+    {% endif %}
+    <a href="{% url 'todo_create' %}" class="btn btn-primary">Nova Tarefa</a>
+{% endblock content%}
