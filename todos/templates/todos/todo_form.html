@@ -7,6 +7,8 @@
 
 {% block content %}
     {% if todo.pk %}
+    <div class="alert alert-dark" role="alert">
+        <h3 style="text-align:Center; font-family: Verdana; font-size:30px;">Editar a Tarefa</h3>
         <span class="badge badge-primary">Primary</span>
         <span class="badge badge-secondary">Secondary</span>
         <span class="badge badge-success">Success</span>
@@ -14,9 +16,12 @@
         <span class="badge badge-warning">Warning</span>
         <span class="badge badge-info">Info</span>
         <span class="badge badge-light">Light</span>
-        <span class="badge badge-dark">Dark</span></br></br>
-        <h3>Editar a Tarefa</h3>
+        <span class="badge badge-dark">Dark</span>
+    </div>
+        
     {% else %}
+    <div class="alert alert-dark" role="alert">
+        <h3 style="text-align:Center; font-family: Verdana; font-size:30px;">Criar Nova Tarefa.</h3>
         <span class="badge badge-primary">Primary</span>
         <span class="badge badge-secondary">Secondary</span>
         <span class="badge badge-success">Success</span>
@@ -24,8 +29,8 @@
         <span class="badge badge-warning">Warning</span>
         <span class="badge badge-info">Info</span>
         <span class="badge badge-light">Light</span>
-        <span class="badge badge-dark">Dark</span></br></br>
-        <h3>Criar Nova Tarefa.</h3>
+        <span class="badge badge-dark">Dark</span>
+    </div>
     {% endif %}
         <form method="POST">
             {% csrf_token %}
